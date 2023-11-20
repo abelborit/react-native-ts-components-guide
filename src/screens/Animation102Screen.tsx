@@ -9,11 +9,14 @@ import {
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '../navigators/StackNavigator';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
 
 interface Animation102ScreenProps
   extends StackScreenProps<RootStackParams, 'Animation102Screen'> {}
 
 export const Animation102Screen = ({navigation}: Animation102ScreenProps) => {
+  const insets = useSafeAreaInsets();
   const pan = useRef(new Animated.ValueXY()).current;
 
   const panResponder = PanResponder.create({
@@ -46,31 +49,45 @@ export const Animation102Screen = ({navigation}: Animation102ScreenProps) => {
   });
 
   return (
-    <View style={styles.container}>
-      <Text style={{fontSize: 20}}>Move the box to anything side!</Text>
+    <View
+      style={{
+        ...styles.container,
+        marginTop: insets.top + 15,
+        marginBottom: insets.bottom + 15,
+        marginLeft: insets.left + 15,
+        marginRight: insets.right + 15,
+      }}>
+      <HeaderTitleComponents title="Animated Component 2" />
 
-      <Animated.View
-        {...panResponder.panHandlers}
-        // style={[pan.getLayout(), styles.boxElement]}
-        style={[
-          {transform: [{translateX: pan.x}, {translateY: pan.y}]},
-          styles.boxElement,
-        ]}
-      />
+      <View style={styles.containerBox}>
+        <Text style={{fontSize: 20}}>Move the box to anything side!</Text>
 
-      <Button
-        color={'#d00'}
-        title="Back to Home"
-        onPress={() => {
-          navigation.navigate('HomeScreen');
-        }}
-      />
+        <Animated.View
+          {...panResponder.panHandlers}
+          // style={[pan.getLayout(), styles.boxElement]}
+          style={[
+            {transform: [{translateX: pan.x}, {translateY: pan.y}]},
+            styles.boxElement,
+          ]}
+        />
+
+        <Button
+          color={'#d00'}
+          title="Back to Home"
+          onPress={() => {
+            navigation.navigate('HomeScreen');
+          }}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  containerBox: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

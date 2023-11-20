@@ -10,13 +10,14 @@ interface RenderDataItemInterface {
   menuItem: MenuItemInterface;
 }
 
-export const RenderHeaderList = () => {
-  return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>Menu Options</Text>
-    </View>
-  );
-};
+/* se está usando ahora el <HeaderTitleComponents /> */
+// export const RenderHeaderList = () => {
+//   return (
+//     <View style={styles.headerContainer}>
+//       <Text style={styles.headerText}>Menu Options</Text>
+//     </View>
+//   );
+// };
 
 export const RenderItemSeparator = () => {
   return <View style={styles.itemSeparator} />;
@@ -42,14 +43,14 @@ export const RenderDataItem = ({menuItem}: RenderDataItemInterface) => {
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    marginBottom: 10,
-  },
-  headerText: {
-    fontSize: 35,
-    fontWeight: 'bold',
-    color: '#222',
-  },
+  // headerContainer: {
+  //   marginBottom: 10,
+  // },
+  // headerText: {
+  //   fontSize: 35,
+  //   fontWeight: 'bold',
+  //   color: '#222',
+  // },
   menuItemContainer: {
     flexDirection: 'row',
     gap: 10,
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
   },
   menuItemText: {
     fontSize: 20,
+    fontWeight: '500',
     color: '#333',
   },
   itemSeparator: {
