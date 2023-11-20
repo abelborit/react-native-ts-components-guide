@@ -5,6 +5,7 @@ import {Animation101Screen} from '../screens/Animation101Screen';
 import {Animation102Screen} from '../screens/Animation102Screen';
 import {SwitchScreen} from '../screens/SwitchScreen';
 import {AlertScreen} from '../screens/AlertScreen';
+import {TextInputScreen} from '../screens/TextInputScreen';
 
 export type RootStackParams = {
   HomeScreen: undefined;
@@ -12,6 +13,7 @@ export type RootStackParams = {
   Animation102Screen: undefined;
   SwitchScreen: undefined;
   AlertScreen: undefined;
+  TextInputScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -54,6 +56,11 @@ export const StackNavigator = () => {
         name="AlertScreen"
         options={{title: 'Alert'}}
         component={AlertScreen}
+      />
+      <Stack.Screen
+        name="TextInputScreen"
+        options={{title: 'Text Input'}}
+        component={TextInputScreen}
       />
     </Stack.Navigator>
   );
