@@ -27,7 +27,7 @@ export const HomeScreen = () => {
         marginRight: insets.right + 15,
       }}>
       <FlatList
-        contentContainerStyle={{flex: 1}} // para que ocupe toda la pantalla
+        // contentContainerStyle={{flex: 1}} // para que ocupe toda la pantalla
         data={menuItems}
         renderItem={({item}) => <RenderDataItem menuItem={item} />}
         keyExtractor={item => item.name}
