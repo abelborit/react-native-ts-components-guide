@@ -9,16 +9,21 @@
 - En esta sección vamos a trabajar con muchos componentes de React Native y su personalización.
 
 - Animaciones
+  - Custom Hooks
+  - Componentes usando animaciones
 - FlatLists
   - Normales
   - Agrupadas
+- SectionsList
 - Modals
 - Alertas
 - Switches
+- PullToRefresh (para refrescar la pantalla)
 - TextInputs
-- Teclados
-- Imágenes
-- FadeInImage
+  - Teclados
+- InfiniteScroll
+  - Imágenes
+  - FadeInImage (efecto fadeIn con imágenes)
 
 ### \* PASOS A REALIZAR:
 
