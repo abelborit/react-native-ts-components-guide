@@ -8,22 +8,24 @@
 
 - En esta sección vamos a trabajar con muchos componentes de React Native y su personalización.
 
-- Animaciones
-  - Custom Hooks
-  - Componentes usando animaciones
-- FlatLists
-  - Normales
-  - Agrupadas
-- SectionsList
-- Modals
-- Alertas
-- Switches
-- PullToRefresh (para refrescar la pantalla)
-- TextInputs
-  - Teclados
-- InfiniteScroll
-  - Imágenes
-  - FadeInImage (efecto fadeIn con imágenes)
+  - Animaciones
+    - Custom Hooks
+    - Componentes usando animaciones
+  - FlatLists
+    - Normales
+    - Agrupadas
+  - SectionsList
+  - Modals
+  - Alertas
+  - Switches
+  - PullToRefresh (para refrescar la pantalla)
+  - TextInputs
+    - Teclados
+  - InfiniteScroll
+    - Imágenes
+    - FadeInImage (efecto fadeIn con imágenes)
+
+- Esta sección tiene por objetivo crear un slide inicial, que nos sirva para hacer tutoriales o explicaciones de cómo funciona nuestra aplicación pero el objetivo principal es que podamos cambiar el tema entre Dark, Light o bien crear nuestro propio tema personalizado para que todos los componentes de la aplicación luzcan acorde al tema seleccionado según el tema del dispositivo.
 
 ### \* PASOS A REALIZAR:
 
@@ -33,9 +35,9 @@
 
 ### \* RECURSOS A USAR:
 
-- ejemplo
-- ejemplo
-- ejemplo
+- react-native-reanimated-carousel (https://github.com/dohooo/react-native-reanimated-carousel) (https://www.npmjs.com/package/react-native-reanimated-carousel):
+  - `npm i react-native-reanimated-carousel`
+  - `npm i react-native-gesture-handler react-native-reanimated`
 
 ---
 

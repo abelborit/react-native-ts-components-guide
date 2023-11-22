@@ -15,7 +15,7 @@ import {RootStackParams} from '../navigators/StackNavigator';
 import {FadeInImage} from '../components/FadeInImage';
 
 interface InfiniteScrollScreenProps
-  extends StackScreenProps<RootStackParams, 'ModalScreen'> {}
+  extends StackScreenProps<RootStackParams, 'InfiniteScrollScreen'> {}
 
 // const FlatListRenderItem = ({item}: ListRenderItemInfo<number>) => { // otra forma de hacerlo
 const FlatListRenderItem = (item: number) => {

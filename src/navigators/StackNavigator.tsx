@@ -10,6 +10,7 @@ import {PullToRefreshScreen} from '../screens/PullToRefreshScreen';
 import {SectionListScreen} from '../screens/SectionListScreen';
 import {ModalScreen} from '../screens/ModalScreen';
 import {InfiniteScrollScreen} from '../screens/InfiniteScrollScreen';
+import {SlideTutorialScreen} from '../screens/SlideTutorialScreen';
 
 export type RootStackParams = {
   HomeScreen: undefined;
@@ -22,6 +23,7 @@ export type RootStackParams = {
   SectionListScreen: undefined;
   ModalScreen: undefined;
   InfiniteScrollScreen: undefined;
+  SlideTutorialScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -89,6 +91,11 @@ export const StackNavigator = () => {
         name="InfiniteScrollScreen"
         options={{title: 'Infinite Scroll'}}
         component={InfiniteScrollScreen}
+      />
+      <Stack.Screen
+        name="SlideTutorialScreen"
+        options={{title: 'Slide Tutorial'}}
+        component={SlideTutorialScreen}
       />
     </Stack.Navigator>
   );
