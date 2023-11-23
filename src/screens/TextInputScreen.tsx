@@ -1,18 +1,13 @@
-import React from 'react';
-import {
-  Button,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
 import {StackScreenProps} from '@react-navigation/stack';
-import {RootStackParams} from '../navigators/StackNavigator';
-import {useForm} from '../hooks/useForm';
+import React, {useContext} from 'react';
+import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
+import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
 import {SwitchCustom} from '../components/SwitchCustom';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {useForm} from '../hooks/useForm';
+import {RootStackParams} from '../navigators/StackNavigator';
 
 interface TextInputScreenProps
   extends StackScreenProps<RootStackParams, 'TextInputScreen'> {}
@@ -25,6 +20,7 @@ const initialStateForm = {
 };
 
 export const TextInputScreen = ({navigation}: TextInputScreenProps) => {
+  const {theme} = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
 
   const {formState, handleChangeForm} = useForm(initialStateForm);
@@ -41,12 +37,17 @@ export const TextInputScreen = ({navigation}: TextInputScreenProps) => {
         }}>
         <HeaderTitleComponents title="Text Input Component" />
 
-        <Text style={styles.formState}>
+        <Text style={{...styles.formState, color: theme.colors.primary}}>
           {JSON.stringify(formState, null, 3)}
         </Text>
 
         <TextInput
-          style={styles.inputStyle}
+          style={{
+            ...styles.inputStyle,
+            borderColor: theme.colors.primary,
+            color: theme.colors.primary,
+          }}
+          placeholderTextColor={theme.colorsExtra.dividerColor}
           onChangeText={value => handleChangeForm(value, 'name')}
           value={formState.name}
           placeholder="Put your name here"
@@ -56,7 +57,12 @@ export const TextInputScreen = ({navigation}: TextInputScreenProps) => {
         />
 
         <TextInput
-          style={styles.inputStyle}
+          style={{
+            ...styles.inputStyle,
+            borderColor: theme.colors.primary,
+            color: theme.colors.primary,
+          }}
+          placeholderTextColor={theme.colorsExtra.dividerColor}
           onChangeText={value => handleChangeForm(value, 'email')}
           value={formState.email}
           placeholder="example.email@email.com"
@@ -66,38 +72,40 @@ export const TextInputScreen = ({navigation}: TextInputScreenProps) => {
         />
 
         <View style={{gap: 12, marginVertical: 12}}>
-          <Text>
+          <Text style={{color: theme.colors.primary}}>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi, ad
             a sunt facere labore voluptatem in autem doloremque ipsa voluptas
             sed ea soluta. Iste adipisci velit id illo accusamus unde? lorem
           </Text>
 
-          <Text>
+          <Text style={{color: theme.colors.primary}}>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi, ad
             a sunt facere labore voluptatem in autem doloremque ipsa voluptas
             sed ea soluta. Iste adipisci velit id illo accusamus unde? lorem
           </Text>
 
-          <Text>
+          <Text style={{color: theme.colors.primary}}>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi, ad
             a sunt facere labore voluptatem in autem doloremque ipsa voluptas
             sed ea soluta. Iste adipisci velit id illo accusamus unde? lorem
           </Text>
 
-          <Text>
+          <Text style={{color: theme.colors.primary}}>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi, ad
             a sunt facere labore voluptatem in autem doloremque ipsa voluptas
             sed ea soluta. Iste adipisci velit id illo accusamus unde? lorem
           </Text>
 
-          <Text>
+          <Text style={{color: theme.colors.primary}}>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi, ad
             a sunt facere labore voluptatem
           </Text>
         </View>
 
         <View style={styles.switchRow}>
-          <Text style={styles.switchText}>Suscribirse</Text>
+          <Text style={{...styles.switchText, color: theme.colors.primary}}>
+            Suscribirse
+          </Text>
           <SwitchCustom
             isOn={formState.isSubscribed}
             onChange={value => handleChangeForm(value, 'isSubscribed')}
@@ -105,7 +113,12 @@ export const TextInputScreen = ({navigation}: TextInputScreenProps) => {
         </View>
 
         <TextInput
-          style={styles.inputStyle}
+          style={{
+            ...styles.inputStyle,
+            borderColor: theme.colors.primary,
+            color: theme.colors.primary,
+          }}
+          placeholderTextColor={theme.colorsExtra.dividerColor}
           onChangeText={value => handleChangeForm(value, 'phone')}
           value={formState.phone}
           placeholder="000 000 000"
@@ -114,13 +127,7 @@ export const TextInputScreen = ({navigation}: TextInputScreenProps) => {
 
         <View style={{height: 30}} />
 
-        <Button
-          color={'#d00'}
-          title="Back to Home"
-          onPress={() => {
-            navigation.navigate('HomeScreen');
-          }}
-        />
+        <BackToHomeBtn theme={theme} navigation={navigation} />
       </View>
     </ScrollView>
   );
@@ -138,11 +145,9 @@ const styles = StyleSheet.create({
   formState: {
     fontSize: 20,
     marginBottom: 20,
-    color: '#333',
   },
   switchText: {
     fontSize: 24,
-    color: '#333',
   },
   switchRow: {
     flexDirection: 'row',

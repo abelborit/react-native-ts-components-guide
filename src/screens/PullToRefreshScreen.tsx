@@ -1,16 +1,17 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useCallback, useState} from 'react';
-import {RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
-import {RootStackParams} from '../navigators/StackNavigator';
-import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
+import React, {useCallback, useContext, useState} from 'react';
+import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Button} from 'react-native';
-import {Text} from 'react-native';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
+import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {RootStackParams} from '../navigators/StackNavigator';
 
 interface PullToRefreshScreenProps
   extends StackScreenProps<RootStackParams, 'PullToRefreshScreen'> {}
 
 export const PullToRefreshScreen = ({navigation}: PullToRefreshScreenProps) => {
+  const {theme} = useContext(ThemeContext);
   const [refreshing, setRefreshing] = useState(false);
   const [dataState, setDataState] = useState<string>('');
   const insets = useSafeAreaInsets();
@@ -35,9 +36,9 @@ export const PullToRefreshScreen = ({navigation}: PullToRefreshScreenProps) => {
           colors={['red', 'blue', 'green', 'purple', 'orange']} // Android
           progressViewOffset={50} // Android e iOS
           style={{backgroundColor: 'red'}} // iOS
-          tintColor={'#fff'} // iOS
+          tintColor={theme.colors.primary} // iOS
           title="Recargando..." // iOS
-          titleColor={'#fff'} // iOS
+          titleColor={theme.colors.primary} // iOS
         />
       }>
       <View
@@ -52,24 +53,19 @@ export const PullToRefreshScreen = ({navigation}: PullToRefreshScreenProps) => {
 
         <Text
           style={{
+            height: 80,
+            textAlignVertical: 'center',
             fontSize: 25,
             marginVertical: 60,
             textAlign: 'center',
-            color: '#333',
+            color: theme.colors.primary,
           }}>
           {dataState === ''
             ? 'Haz pull hacia abajo para cargar el contenido!'
             : dataState}
         </Text>
 
-        <Button
-          disabled={refreshing} // para que se deshabilite cuando se esté haga el pull to refresh
-          color={'#d00'}
-          title="Back to Home"
-          onPress={() => {
-            navigation.navigate('HomeScreen');
-          }}
-        />
+        <BackToHomeBtn theme={theme} navigation={navigation} />
       </View>
     </ScrollView>
   );

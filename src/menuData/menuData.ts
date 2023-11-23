@@ -51,4 +51,9 @@ export const menuItems: MenuItemInterface[] = [
     icon: 'layers-outline',
     componentName: 'SlideTutorialScreen',
   },
+  {
+    name: 'Change Theme',
+    icon: 'flask-outline',
+    componentName: 'ChangeThemeScreen',
+  },
 ];

@@ -1,14 +1,17 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React from 'react';
+import React, {useContext} from 'react';
 import {Alert, Button, StyleSheet, Text, View} from 'react-native';
 import {RootStackParams} from '../navigators/StackNavigator';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 interface AlertScreenProps
   extends StackScreenProps<RootStackParams, 'AlertScreen'> {}
 
 export const AlertScreen = ({navigation}: AlertScreenProps) => {
+  const {theme} = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
 
   const handleShowAlert1 = () =>
@@ -132,7 +135,7 @@ export const AlertScreen = ({navigation}: AlertScreenProps) => {
             marginTop: 10,
             marginBottom: -10,
             fontSize: 16,
-            color: '#333',
+            color: theme.colors.primary,
           }}>
           El Prompt Alert solo funciona para iOS
         </Text>
@@ -143,13 +146,7 @@ export const AlertScreen = ({navigation}: AlertScreenProps) => {
         />
       </View>
 
-      <Button
-        color={'#d00'}
-        title="Back to Home"
-        onPress={() => {
-          navigation.navigate('HomeScreen');
-        }}
-      />
+      <BackToHomeBtn theme={theme} navigation={navigation} />
     </View>
   );
 };

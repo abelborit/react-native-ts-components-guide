@@ -1,21 +1,17 @@
-import React, {useRef} from 'react';
-import {
-  Animated,
-  Button,
-  PanResponder,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {RootStackParams} from '../navigators/StackNavigator';
+import React, {useContext, useRef} from 'react';
+import {Animated, PanResponder, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
 import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {RootStackParams} from '../navigators/StackNavigator';
 
 interface Animation102ScreenProps
   extends StackScreenProps<RootStackParams, 'Animation102Screen'> {}
 
 export const Animation102Screen = ({navigation}: Animation102ScreenProps) => {
+  const {theme} = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
   const pan = useRef(new Animated.ValueXY()).current;
 
@@ -60,7 +56,9 @@ export const Animation102Screen = ({navigation}: Animation102ScreenProps) => {
       <HeaderTitleComponents title="Animated Component 2" />
 
       <View style={styles.containerBox}>
-        <Text style={{fontSize: 20}}>Move the box to anything side!</Text>
+        <Text style={{fontSize: 20, color: theme.colors.text}}>
+          Move the box to anything side!
+        </Text>
 
         <Animated.View
           {...panResponder.panHandlers}
@@ -71,13 +69,7 @@ export const Animation102Screen = ({navigation}: Animation102ScreenProps) => {
           ]}
         />
 
-        <Button
-          color={'#d00'}
-          title="Back to Home"
-          onPress={() => {
-            navigation.navigate('HomeScreen');
-          }}
-        />
+        <BackToHomeBtn theme={theme} navigation={navigation} />
       </View>
     </View>
   );

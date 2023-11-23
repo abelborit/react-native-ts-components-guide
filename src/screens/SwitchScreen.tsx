@@ -1,15 +1,18 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
-import {RootStackParams} from '../navigators/StackNavigator';
-import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
+import React, {useContext, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
+import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
 import {SwitchCustom} from '../components/SwitchCustom';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {RootStackParams} from '../navigators/StackNavigator';
 
 interface SwitchScreenProps
   extends StackScreenProps<RootStackParams, 'SwitchScreen'> {}
 
 export const SwitchScreen = ({navigation}: SwitchScreenProps) => {
+  const {theme} = useContext(ThemeContext);
   const [switchState, setSwitchState] = useState({
     isActive: true,
     isHungry: false,
@@ -41,7 +44,9 @@ export const SwitchScreen = ({navigation}: SwitchScreenProps) => {
       <HeaderTitleComponents title="Switch Component" />
 
       <View style={styles.switchRow}>
-        <Text style={styles.switchText}>isActive</Text>
+        <Text style={{...styles.switchText, color: theme.colors.primary}}>
+          isActive
+        </Text>
         <SwitchCustom
           isOn={switchState.isActive}
           onChange={value => handleChange(value, 'isActive')}
@@ -49,7 +54,9 @@ export const SwitchScreen = ({navigation}: SwitchScreenProps) => {
       </View>
 
       <View style={styles.switchRow}>
-        <Text style={styles.switchText}>isHungry</Text>
+        <Text style={{...styles.switchText, color: theme.colors.primary}}>
+          isHungry
+        </Text>
         <SwitchCustom
           isOn={switchState.isHungry}
           onChange={value => handleChange(value, 'isHungry')}
@@ -57,24 +64,20 @@ export const SwitchScreen = ({navigation}: SwitchScreenProps) => {
       </View>
 
       <View style={styles.switchRow}>
-        <Text style={styles.switchText}>isHappy</Text>
+        <Text style={{...styles.switchText, color: theme.colors.primary}}>
+          isHappy
+        </Text>
         <SwitchCustom
           isOn={switchState.isHappy}
           onChange={value => handleChange(value, 'isHappy')}
         />
       </View>
 
-      <Text style={styles.switchState}>
+      <Text style={{...styles.switchState, color: theme.colors.primary}}>
         {JSON.stringify(switchState, null, 3)}
       </Text>
 
-      <Button
-        color={'#d00'}
-        title="Back to Home"
-        onPress={() => {
-          navigation.navigate('HomeScreen');
-        }}
-      />
+      <BackToHomeBtn theme={theme} navigation={navigation} />
     </View>
   );
 };
@@ -83,12 +86,10 @@ const styles = StyleSheet.create({
   container: {},
   switchText: {
     fontSize: 24,
-    color: '#333',
   },
   switchState: {
     fontSize: 24,
     marginVertical: 40,
-    color: '#333',
   },
   switchRow: {
     flexDirection: 'row',

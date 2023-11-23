@@ -1,8 +1,7 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   ActivityIndicator,
-  Button,
   FlatList,
   // Image,
   // ListRenderItemInfo,
@@ -13,6 +12,8 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
 import {RootStackParams} from '../navigators/StackNavigator';
 import {FadeInImage} from '../components/FadeInImage';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
 
 interface InfiniteScrollScreenProps
   extends StackScreenProps<RootStackParams, 'InfiniteScrollScreen'> {}
@@ -37,6 +38,7 @@ export const InfiniteScrollScreen = ({
   navigation,
 }: InfiniteScrollScreenProps) => {
   const [numbersArray, setNumbersArray] = useState([0, 1, 2, 3, 4, 5]);
+  const {theme} = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
 
   /* función para hacer un bucle para que se vaya añadiendo 5 elementos nuevos */
@@ -70,13 +72,7 @@ export const InfiniteScrollScreen = ({
         ListHeaderComponent={
           <>
             <HeaderTitleComponents title="Infinite Scroll Component" />
-            <Button
-              color={'#d00'}
-              title="Back to Home"
-              onPress={() => {
-                navigation.navigate('HomeScreen');
-              }}
-            />
+            <BackToHomeBtn theme={theme} navigation={navigation} />
             <View style={{marginBottom: 30}} />
           </>
         }

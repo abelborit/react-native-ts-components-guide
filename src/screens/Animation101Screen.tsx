@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Animated, Button, StyleSheet, View} from 'react-native';
 import {useAnimation} from '../hooks/useAnimation';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '../navigators/StackNavigator';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
 
 const initialStateAnimation = {
   initialOpacity: 0,
@@ -15,6 +17,7 @@ interface Animation101ScreenProps
   extends StackScreenProps<RootStackParams, 'Animation101Screen'> {}
 
 export const Animation101Screen = ({navigation}: Animation101ScreenProps) => {
+  const {theme} = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
   const {
     opacityAnimated,
@@ -60,13 +63,7 @@ export const Animation101Screen = ({navigation}: Animation101ScreenProps) => {
           <Button title="FadeOut" onPress={() => fadeOut(300)} />
         </View>
 
-        <Button
-          color={'#d00'}
-          title="Back to Home"
-          onPress={() => {
-            navigation.navigate('HomeScreen');
-          }}
-        />
+        <BackToHomeBtn theme={theme} navigation={navigation} />
       </View>
     </View>
   );

@@ -1,16 +1,10 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useState} from 'react';
-import {
-  Alert,
-  Button,
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {Alert, Modal, Pressable, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
 import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 import {RootStackParams} from '../navigators/StackNavigator';
 
 interface ModalScreenProps
@@ -18,6 +12,7 @@ interface ModalScreenProps
 
 export const ModalScreen = ({navigation}: ModalScreenProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const {theme} = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
 
   const handleShowModal = () => {
@@ -47,9 +42,13 @@ export const ModalScreen = ({navigation}: ModalScreenProps) => {
         {/* background color oscuro con baja opacidad */}
         <View style={styles.modalContainer}>
           {/* contenido del modal */}
-          <View style={styles.modalContent}>
+          <View
+            style={{
+              ...styles.modalContent,
+              backgroundColor: theme.colors.background,
+            }}>
             <HeaderTitleComponents title="Hello Modal!!" />
-            <Text style={styles.modalText}>
+            <Text style={{...styles.modalText, color: theme.colors.text}}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem id
               doloremque, amet repellendus placeat vitae omnis dolore nulla
               laborum nesciunt corporis minus esse! Voluptatem veniam harum
@@ -63,9 +62,16 @@ export const ModalScreen = ({navigation}: ModalScreenProps) => {
             />
 
             <Pressable
-              style={[styles.modalBtn, styles.modalBtnClose]}
+              style={[
+                styles.modalBtn,
+                styles.modalBtnClose,
+                {backgroundColor: theme.colors.primary},
+              ]}
               onPress={() => handleShowModal()}>
-              <Text style={styles.textBtn}>Hide Modal</Text>
+              <Text
+                style={{...styles.textBtn, color: theme.colorsExtra.btnTxt}}>
+                Hide Modal
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -77,13 +83,7 @@ export const ModalScreen = ({navigation}: ModalScreenProps) => {
         <Text style={styles.textBtn}>Show Modal</Text>
       </Pressable>
 
-      <Button
-        color={'#d00'}
-        title="Back to Home"
-        onPress={() => {
-          navigation.navigate('HomeScreen');
-        }}
-      />
+      <BackToHomeBtn theme={theme} navigation={navigation} />
     </View>
   );
 };
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   container: {},
   modalContainer: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    backgroundColor: 'rgba(0, 0, 0, 0.55)',
     justifyContent: 'center',
   },
   modalContent: {

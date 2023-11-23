@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {
   Image,
@@ -20,6 +20,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
 
 interface SlideInterface {
   title: string;
@@ -60,6 +61,7 @@ interface SlideTutorialScreenProps
 
 export const SlideTutorialScreen = ({navigation}: SlideTutorialScreenProps) => {
   const [activeSliceIndex, setActiveSliceIndex] = useState(0);
+  const {theme} = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
   const dimensions = useWindowDimensions();
   const progressValue = useSharedValue<number>(0);
@@ -87,8 +89,13 @@ export const SlideTutorialScreen = ({navigation}: SlideTutorialScreenProps) => {
             ...styles.sliceInfoContainer,
             width: dimensions.height > dimensions.width ? '100%' : '50%',
           }}>
-          <Text style={styles.sliceTitle}>{sliceItem.title}</Text>
-          <Text style={styles.sliceText}>{sliceItem.desc}</Text>
+          <Text
+            style={{...styles.sliceTitle, color: theme.colorsExtra.iconsColor}}>
+            {sliceItem.title}
+          </Text>
+          <Text style={{...styles.sliceText, color: theme.colors.primary}}>
+            {sliceItem.desc}
+          </Text>
         </View>
       </View>
     );
@@ -107,7 +114,7 @@ export const SlideTutorialScreen = ({navigation}: SlideTutorialScreenProps) => {
         style={{
           fontSize: 30,
           fontWeight: 'bold',
-          color: '#333',
+          color: theme.colors.primary,
           textAlign: 'center',
           marginBottom: -50,
         }}>
@@ -186,7 +193,7 @@ export const SlideTutorialScreen = ({navigation}: SlideTutorialScreenProps) => {
           activeOpacity={0.8}
           style={{
             flexDirection: 'row',
-            backgroundColor: '#695ac6',
+            backgroundColor: theme.colors.primary,
             width: 160,
             height: 50,
             borderRadius: 10,
@@ -195,14 +202,18 @@ export const SlideTutorialScreen = ({navigation}: SlideTutorialScreenProps) => {
           }}>
           <Text
             style={{
-              color: '#fff',
+              color: theme.colorsExtra.btnTxt,
               fontSize: 20,
               fontWeight: '600',
               marginTop: -3,
             }}>
             Enter App
           </Text>
-          <Icon name="chevron-forward-outline" size={30} color="#fff" />
+          <Icon
+            name="chevron-forward-outline"
+            size={30}
+            color={theme.colorsExtra.iconsColor}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -236,11 +247,9 @@ const styles = StyleSheet.create({
   sliceTitle: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#695ac6',
   },
   sliceText: {
     fontSize: 20,
-    color: '#333',
   },
 });
 
@@ -259,6 +268,7 @@ const PaginationItem = ({
   length,
   setActiveSliceIndex,
 }: PaginationItemInterface) => {
+  const {theme} = useContext(ThemeContext);
   const widthDot = 12;
 
   const animStyle = useAnimatedStyle(() => {
@@ -299,7 +309,7 @@ const PaginationItem = ({
           style={[
             {
               borderRadius: 50,
-              backgroundColor: '#695ac6',
+              backgroundColor: theme.colors.primary,
               flex: 1,
             },
             animStyle,

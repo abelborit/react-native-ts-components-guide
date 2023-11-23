@@ -1,10 +1,12 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React from 'react';
-import {Button, SectionList, StyleSheet, Text, View} from 'react-native';
+import React, {useContext} from 'react';
+import {SectionList, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
-import {RootStackParams} from '../navigators/StackNavigator';
+import {BackToHomeBtn} from '../components/BackToHomeBtn';
 import {RenderItemSeparator} from '../components/FlatListCustom';
+import {HeaderTitleComponents} from '../components/HeaderTitleComponents';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {RootStackParams} from '../navigators/StackNavigator';
 
 interface HouseInterface {
   houseName: string;
@@ -93,6 +95,7 @@ interface SectionListScreenProps
   extends StackScreenProps<RootStackParams, 'SectionListScreen'> {}
 
 export const SectionListScreen = ({navigation}: SectionListScreenProps) => {
+  const {theme} = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
 
   return (
@@ -108,7 +111,9 @@ export const SectionListScreen = ({navigation}: SectionListScreenProps) => {
 
       <SectionList
         sections={housesData}
-        renderItem={({item}) => <Text>{item}</Text>}
+        renderItem={({item}) => (
+          <Text style={{fontSize: 16, color: theme.colors.text}}>{item}</Text>
+        )}
         keyExtractor={(item, index) => item + index}
         stickySectionHeadersEnabled={true} // efecto para los headers
         // showsVerticalScrollIndicator={false}
@@ -117,7 +122,11 @@ export const SectionListScreen = ({navigation}: SectionListScreenProps) => {
           <HeaderTitleComponents title="Section List Component" />
         )} // para que tenga el mismo efecto de stickySectionHeadersEnabled pero con el header de todo el componente y con eso nos evitamos colocarlo fuera de <SectionList /> como componente hermano (si es necesario que se vea entonces que se quede afuea de SectionList y eliminar esta propiedad)
         ListFooterComponent={() => (
-          <View style={{marginVertical: 30}}>
+          <View
+            style={{
+              marginVertical: 30,
+              backgroundColor: theme.colors.background,
+            }}>
             <HeaderTitleComponents
               title={`Total houses: ${housesData.length}`}
             />
@@ -125,13 +134,13 @@ export const SectionListScreen = ({navigation}: SectionListScreenProps) => {
         )}
         /*  */
         renderSectionHeader={({section}) => (
-          <View style={{backgroundColor: '#fff'}}>
+          <View style={{backgroundColor: theme.colors.background}}>
             {/* se coloca dentro de un View porque parece que al hacer scroll el texto aparece por debajo del HeaderTitleComponents y da un efecto feo, por eso se establece que tenga un backgroundColor blanco */}
             <HeaderTitleComponents title={section.houseName} />
           </View>
         )}
         renderSectionFooter={({section}) => (
-          <View style={{backgroundColor: '#fff'}}>
+          <View style={{backgroundColor: theme.colors.background}}>
             {/* se coloca dentro de un View porque parece que al hacer scroll el texto aparece por debajo del HeaderTitleComponents y da un efecto feo, por eso se establece que tenga un backgroundColor blanco */}
             <HeaderTitleComponents
               title={`Total data: ${section.data.length}`}
@@ -143,13 +152,7 @@ export const SectionListScreen = ({navigation}: SectionListScreenProps) => {
         ItemSeparatorComponent={() => <RenderItemSeparator />}
       />
 
-      <Button
-        color={'#d00'}
-        title="Back to Home"
-        onPress={() => {
-          navigation.navigate('HomeScreen');
-        }}
-      />
+      <BackToHomeBtn theme={theme} navigation={navigation} />
     </View>
   );
 };
