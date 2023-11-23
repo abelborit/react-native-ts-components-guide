@@ -25,19 +25,50 @@
     - Imágenes
     - FadeInImage (efecto fadeIn con imágenes)
 
-- Esta sección tiene por objetivo crear un slide inicial, que nos sirva para hacer tutoriales o explicaciones de cómo funciona nuestra aplicación pero el objetivo principal es que podamos cambiar el tema entre Dark, Light o bien crear nuestro propio tema personalizado para que todos los componentes de la aplicación luzcan acorde al tema seleccionado según el tema del dispositivo.
+- Se creará un slide inicial que nos sirva para hacer tutoriales o explicaciones de cómo funciona nuestra aplicación o mostrar información adicional.
 
-### \* PASOS A REALIZAR:
-
-1. ejemplo
-2. ejemplo
-3. ejemplo
+- Se crearán los componentes y archivos necesarios para poder cambiar el tema entre Dark, Light o según el tema del dispositivo o sino también dejar la lógica lista para crear nuestro propio tema personalizado con la finalidad que todos los componentes de la aplicación luzcan acorde al tema seleccionado.
 
 ### \* RECURSOS A USAR:
 
 - react-native-reanimated-carousel (https://github.com/dohooo/react-native-reanimated-carousel) (https://www.npmjs.com/package/react-native-reanimated-carousel):
   - `npm i react-native-reanimated-carousel`
   - `npm i react-native-gesture-handler react-native-reanimated`
+
+---
+
+### \* IMÁGENES DE LA APLICACIÓN:
+
+<style>
+  .image-container {
+    text-align: center;
+  }
+  .image-container img {
+    margin: 15px;
+  }
+</style>
+
+<div class="image-container">
+  <img src="./screenshotsApp/Screenshot_1700768544.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768549.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768552.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768556.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768561.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768567.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768571.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768573.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768586.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768591.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768593.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768596.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768601.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768608.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768612.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768615.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768617.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768622.png" alt="image" width="200">
+  <img src="./screenshotsApp/Screenshot_1700768626.png" alt="image" width="200">
+</div>
 
 ---
 
